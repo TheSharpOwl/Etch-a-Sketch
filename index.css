@@ -3,6 +3,12 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
+header:after {
+    display: table;
+    clear: both;
+    content: '';
+}
+
 .dark-theme {
     background-color: #333;
     color: #fff;
@@ -12,4 +18,32 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#board-container {
+    background-color: brown;
+    width: 70vh; /* view of the screen */
+    height: 70vh;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.board-column {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin : 0;
+}
+
+.board-row {
+    display: flex;
+    justify-content: center;
+    margin:0;
+    /*  no need for flex-direction here (row by default) */
+}
+
+.square {
+ background-color: blue;   
+ size: 10px;
 }
