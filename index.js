@@ -13,6 +13,12 @@ const menuSelectionColor = "yellow"
 let brushColor = "#4B0082"
 let backgroundColor = "#FFD700"
 
+function swap(x, y) {
+  var t = x;
+  x = y;
+  y = t;
+  return [x, y];
+}
 
 function copyDimensionsAndSpaces(sourceElement, targetElement) {
   // Get the computed styles of the source element
@@ -71,8 +77,16 @@ const generateBoard = (n) => {
 function resizeImages() {
   const img1 = document.getElementById("anna-img")
   const img2 = document.getElementById("koshi-img")
-  const minWidth = Math.min(img1.width, img2.width)
-  img1.style.width = img2.style.width = minWidth + "px"
+  const maxWidth = Math.max(img1.width, img2.width)
+
+  if(img2.width < img1.width) {
+    swap(img1, img2)
+  }
+
+  // make border of the smaller image to be the same as the bigger one but keep the image itself fine
+  const orginalSize = img2.width
+  img2.parentNode.style.width = maxWidth + "px"
+  img2.style.width = orginalSize + "px"
 }
 
 function markSelected(buttonName) {
