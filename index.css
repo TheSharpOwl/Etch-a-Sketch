@@ -79,3 +79,16 @@ header:after {
     align-items: space-between;
     flex-direction: row;
 }
+
+.image-container {
+    display: flex;
+    justify-content: flex-start; /* Align horizontally (if needed) */
+    align-items: flex-end; /* Push the image to the bottom */
+}
+
+
+#color-input {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
