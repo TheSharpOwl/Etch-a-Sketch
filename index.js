@@ -11,6 +11,7 @@ const menuSelectionColor = "yellow"
 
 
 let brushColor = "#4B0082"
+let chosenColor = brushColor
 let backgroundColor = "#FFD700"
 
 function swap(x, y) {
@@ -110,7 +111,7 @@ function adjustComponentsAndMarkBrush() {
 function menuSetup() {
   // setup clicking events
   buttonsMap.get("eraser").addEventListener('click', () => {brushColor = backgroundColor; markSelected("eraser")});
-  buttonsMap.get("brush").addEventListener('click', () => {markSelected("brush")});
+  buttonsMap.get("brush").addEventListener('click', () => {markSelected("brush"); brushColor = chosenColor;});
   // when we select the palette we actually click on the hidden color input
   buttonsMap.get("palette").addEventListener('click', () => {document.getElementById('color-input').click(); markSelected("palette")});
 
@@ -118,6 +119,7 @@ function menuSetup() {
   let colorInputComponent = document.getElementById('color-input');
   colorInputComponent.addEventListener('input', (event) => {
     brushColor = event.target.value;
+    chosenColor = brushColor;
     colorRect.style.backgroundColor = brushColor;
   });
   // because it will be a brush but selection is stuck on the palette
