@@ -3,7 +3,8 @@ const buttonsMap = new Map([
   ["brush", document.getElementById("brush")],
   ["palette", document.getElementById("palette")],
   ["eraser", document.getElementById("eraser")],
-  ["resize", document.getElementById("resize")]
+  ["resize", document.getElementById("resize")],
+  ["clear", document.getElementById("clear")]
 ]);
 
 const selectedPadding = "5px"
@@ -117,7 +118,6 @@ function menuSetup() {
   buttonsMap.get("brush").addEventListener('click', () => {markSelected("brush"); brushColor = chosenColor;});
   // when we select the palette we actually click on the hidden color input
   buttonsMap.get("palette").addEventListener('click', () => {document.getElementById('color-input').click(); markSelected("palette")});
-  // TODO add the resize functionality
   buttonsMap.get("resize").addEventListener('click', () => {
     // by default the value stays the same
     let newGridSize = prompt("Enter a new size", gridSize.toString());
@@ -130,6 +130,10 @@ function menuSetup() {
     else {
       alert(`Invalid number format will default to ${gridSize}`)
     }
+  })
+
+  buttonsMap.get("clear").addEventListener('click', () => {
+   generateBoard(gridSize);
   })
 
   // setup color input (hidden from the UI)
