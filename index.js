@@ -2,14 +2,15 @@
 const buttonsMap = new Map([
   ["brush", document.getElementById("brush")],
   ["palette", document.getElementById("palette")],
-  ["eraser", document.getElementById("eraser")]
+  ["eraser", document.getElementById("eraser")],
+  ["resize", document.getElementById("resize")]
 ]);
 
 const selectedPadding = "5px"
 const nonSelectedPadding = "10px"
 const menuSelectionColor = "yellow"
 
-
+let gridSize = 16 // initial size for the grid
 let brushColor = "#4B0082"
 let chosenColor = brushColor
 let backgroundColor = "#FFD700"
@@ -62,6 +63,8 @@ function createBoardRow(n) {
 const generateBoard = (n) => {
   // inside of this div we will make many rows and align them like a column
   const rowsDiv = document.getElementById("board-container");
+  // reset the container
+  rowsDiv.innerHTML = "";
   rowsDiv.className = "board-column";
   let rowRefs = [];
 
@@ -114,6 +117,20 @@ function menuSetup() {
   buttonsMap.get("brush").addEventListener('click', () => {markSelected("brush"); brushColor = chosenColor;});
   // when we select the palette we actually click on the hidden color input
   buttonsMap.get("palette").addEventListener('click', () => {document.getElementById('color-input').click(); markSelected("palette")});
+  // TODO add the resize functionality
+  buttonsMap.get("resize").addEventListener('click', () => {
+    // by default the value stays the same
+    let newGridSize = prompt("Enter a new size", gridSize.toString());
+
+    if(newGridSize != null && parseInt(newGridSize, 10).toString() === newGridSize && parseInt(newGridSize) > 1)
+    {
+      gridSize = newGridSize;
+      generateBoard(gridSize);
+    }
+    else {
+      alert(`Invalid number format will default to ${gridSize}`)
+    }
+  })
 
   // setup color input (hidden from the UI)
   let colorInputComponent = document.getElementById('color-input');
